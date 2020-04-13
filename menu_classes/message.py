@@ -1,4 +1,6 @@
+#!/usr/bin/python
 # message class
+
 import os
 import time
 import ast
