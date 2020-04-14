@@ -34,6 +34,9 @@ class Message:
             self.outbox()
         elif command == "S" or command == 's':
             self.sent()
+        else:
+            print("Invalid command")
+            self.main()
 
     def exit(self):
         self.menu.__init__()
@@ -54,7 +57,7 @@ class Message:
             self.__init__()
 
         command = input("Enter 'send' to send, 'save' to save to drafts\
-        'back' to go back")
+        'back' to go back\n")
 
         if command == "back" or command == 'e-x':
             self.__init__()
@@ -67,6 +70,8 @@ class Message:
             # keep making a mistake unless they opt to exit
             cond = True
             while cond:
+                if to == 'e-x':
+                    self.__init__()
                 try:
                     # since all inputs are strings
                     if int(to):
@@ -159,7 +164,7 @@ class Message:
                 self.__init__()
             if command in lok:
                 print(table[command])
-                time.sleep(13)
+                time.sleep(3)
                 cd = input('Ready to exit?: ')
                 if cd == 'e-x':
                     self.__init__()
