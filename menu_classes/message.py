@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # message class
+# Author:   @BlankGodd
 
 import os
 import time

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# Author:   @BlankGodd
 
 import time, sys
 from pyfiglet import Figlet

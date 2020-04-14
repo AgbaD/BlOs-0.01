@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #contact class
+# Author:   @BlankGodd
 
 from message import Message
 import ast
