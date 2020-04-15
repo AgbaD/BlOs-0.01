@@ -66,7 +66,16 @@ class Entry:
                 else:
                     print('Incorrect password')
                     # still to deal with forgot password
+                    name = input("Username: ")
+                    if name == 'e-x':
+                        print('Shuting down...')
+                        time.sleep(3)
+                        sys.exit()
                     password = input("Password: ")
+                    if password == 'e-x':
+                        print('Shuting down...')
+                        time.sleep(3)
+                        sys.exit()
             else:
                 print('Username not recognised')
                 print('To enter new username, type "E"\
@@ -74,7 +83,15 @@ class Entry:
                 c = input(":")
                 if c == 'E' or c == 'e':
                     name = input("Username: ")
+                    if name == 'e-x':
+                        print('Shuting down...')
+                        time.sleep(3)
+                        sys.exit()
                     password = input("Password: ")
+                    if password == 'e-x':
+                        print('Shuting down...')
+                        time.sleep(3)
+                        sys.exit()
                 elif c == 's' or c == 'S':
                     cond = False
                     self.signup()
@@ -121,8 +138,6 @@ class Entry:
             print('Shuting down...')
             time.sleep(3)
             sys.exit()
-        
-        iden = ''
 
         if os.path.exists(account_file):
 
@@ -150,13 +165,13 @@ class Entry:
                     table[name] = [password, iden, que, ans]
                     with open(self.account_file, 'w') as f:
                         f.write(str(table))
+                    cond1 = False
                     self.login()
 
                     # val 0 is password
                     # val 1 is iden
                     # val 2 is security question
                     # val 3 is answer
-                    cond1 = False
 
 
 
