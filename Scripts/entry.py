@@ -5,12 +5,37 @@ import ast
 import os, sys
 import time
 import random
-    
+from pyfiglet import Figlet
+
+
+class Start:
+
+    def __init__(self):
+        banner = Figlet(font='standard')
+        print(banner.renderText("Blank Os - 0.01"))
+
+        self.start()
+
+    def start(self):
+        starting = 'Starting:[                    ]'
+        for i in range(103):
+            time.sleep(0.05)
+            if i < 101:
+                sys.stdout.write('\r' + starting + '{0}%'.format(i))
+            else:
+                sys.stdout.write('\r' + starting + '100%')
+            if i==10 or i==20 or i==30 or i==40 or i==50 or i==60 or i==70 or \
+            i==80 or i==90 or i==100:
+                starting = starting.replace('  ','::',1)
+            sys.stdout.flush()
+
 
 class Entry:
 
     def __init__(self):    
-        print("Welcome to BlOs")
+        print()
+        print()
+        print("Welcome to Blank Os")
         print("Enter L to login or S to signup")
         print("Enter 'e-x' at any input point to exit")
         s = input(':')
@@ -34,6 +59,7 @@ class Entry:
             self.signup()
 
     def login(self):
+        print("Enter login details")
         name = input("Username: ")
         if name == 'e-x':
             print('Shuting down...')
@@ -47,9 +73,15 @@ class Entry:
             sys.exit()
 
         iden = ''
-    
-        with open(self.account_file, 'r')as f:
-            table = ast.literal_eval(f.read())
+
+        try:
+            with open(self.account_file, 'r')as f:
+                table = ast.literal_eval(f.read())
+        except:
+            print("Login Error!!!")
+            time.sleep(1)
+            print()
+            self.__init__()
     
         names = [key for key in table.keys()] 
         cond = True
@@ -64,6 +96,7 @@ class Entry:
                     iden = val[1]
                     cond = False
                 else:
+                    print()
                     print('Incorrect password')
                     # still to deal with forgot password
                     name = input("Username: ")
@@ -84,6 +117,7 @@ class Entry:
                 if c == 'E' or c == 'e':
                     name = input("Username: ")
                     if name == 'e-x':
+                        print()
                         print('Shuting down...')
                         time.sleep(3)
                         sys.exit()
@@ -101,6 +135,7 @@ class Entry:
                     time.sleep(3)
                     sys.exit()
 
+        print("Login succesful")
         if iden == '':
             pass
         else:
@@ -139,14 +174,19 @@ class Entry:
             time.sleep(3)
             sys.exit()
 
-        if os.path.exists(account_file):
+        if os.path.exists(self.account_file):
 
             cond1 = True
             while cond1:  
-                with open(self.account_file, 'r')as f:
-                    table = ast.literal_eval(f.read())
-                names = [key for key in table.keys()]
+                try:
+                    with open(self.account_file, 'r')as f:
+                        table = ast.literal_eval(f.read())
+                    names = [key for key in table.keys()]
+                except:
+                    table = {}
+                    names = []
                 if name in names:
+                    print()
                     print("Username already taken!")
                     print("Input new username")
                     name = input("Username: ")
@@ -166,6 +206,10 @@ class Entry:
                     with open(self.account_file, 'w') as f:
                         f.write(str(table))
                     cond1 = False
+
+                    # creates an object of the phone/home class
+                    # yet to be worked on
+
                     self.login()
 
                     # val 0 is password
