@@ -135,7 +135,6 @@ class Entry:
                     time.sleep(3)
                     sys.exit()
 
-        print("Login succesful")
         if iden == '':
             pass
         else:
