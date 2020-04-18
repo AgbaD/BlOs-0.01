@@ -3,26 +3,29 @@
 # Author:   @BlankGodd
 
 from message import Message
+from menu import Menu
 import ast
 import os
 
 
-class Contacts:
+class Contacts(Menu):
     # when contact is instatiated, it takes with it a refrence to the
     # menu so as to be able to exit when needed
 
-    def __init__(self, menu):
+    def __init__(self, iden):
         print("Add Contact[A]")
         print("View Contacts[V]")
         print("Message contact[M]")
         print("Exit[e-x]")
-        self.menu = menu
+        # self.menu = menu
+        self.iden = iden
         self.main()
 
     def main(self):
         command = input("Enter your command\n")
         if command == 'e-x':
-            self.exit()
+            super()
+            return
         elif command == 'M' or command == 'm':
             self.cont_create_message()
         elif command == 'V' or command == 'v':
@@ -34,12 +37,12 @@ class Contacts:
             self.main()
     
     def exit(self):
-        self.menu.__init__()
+        self.menu()
         # i might have to remove the '.__init__' eventually though
         # if it works without it
 
     def cont_create_message(self):
-        m = Message()
+        m = Message(self.iden)
         m.create_message()
         print('CONTACTS')
         self.__init__()
@@ -64,7 +67,7 @@ class Contacts:
             with open(cont_file, 'r') as f:
                 table = ast.literal_eval(f.read())
             for key, value in table.items():
-                print(key':\t' value)
+                print(key, ':\t', value)
             command = input("Enter 'M' to message contact or any other key to go back\n")
             if command == 'M' or command == 'm':
                 self.cont_create_message()

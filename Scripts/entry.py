@@ -6,6 +6,7 @@ import os, sys
 import time
 import random
 from pyfiglet import Figlet
+from phone import Home
 
 
 class Start:
@@ -205,6 +206,18 @@ class Entry:
                     with open(self.account_file, 'w') as f:
                         f.write(str(table))
                     cond1 = False
+
+                    x = Home(iden)
+                    ser = {}
+                    try:
+                        with open(self.server_file, 'r') as f:
+                            ser = ast.literal_eval(f.read())
+                    except:
+                        pass
+                    
+                    ser[iden] = x
+                    with open(self.server_file, 'w') as f:
+                        f.write(str(ser))
 
                     # creates an object of the phone/home class
                     # yet to be worked on

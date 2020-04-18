@@ -4,17 +4,19 @@
 
 import math
 import os
+from menu import Menu
 
-class Calculator:
+class Calculator(Menu):
     
-    def __init(self, menu):
-        self.menu = menu
+    def __init(self, iden):
+        # self.menu = menu
+        self.iedn = iden
         self.main()
 
     def main(self):
         self.command = input("Enter your command\n")
         for i in self.command:
-            try int(i)
+            pass
 
     def add(self, a, b):
         return a + b

@@ -5,26 +5,29 @@
 import os
 import time
 import ast
+from menu import Menu
 
 
-class Message:
+class Message(Menu):
     # when message is instatiated, it takes with it a refrence to the
     # menu so as to be able to exit when needed
 
-    def __init__(self, menu):
+    def __init__(self, iden):
         print("Create message[C]")
         print("Inbox[I]")
         print("Drafts[D]")
         print("Outbox[O]")
         print("Sent[S]")
         print("Exit[e-x]")
-        self.menu = menu
+        # self.menu = menu
+        self.iden = iden
         self.main()
 
     def main(self):
         command = input("Enter your command\n")
         if command == 'e-x':
-            self.exit()
+            super().__init__(self.iden)
+            return
         elif command == 'C' or command == 'c':
             self.create_message()
         elif command == 'I' or command == 'i':
@@ -40,7 +43,7 @@ class Message:
             self.main()
 
     def exit(self):
-        self.menu.__init__()
+        self.menu()
         # i might have to remove the '.__init__' eventually though
         # if it works without it
 
