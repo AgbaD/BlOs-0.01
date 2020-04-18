@@ -139,6 +139,8 @@ class Entry:
         if iden == '':
             pass
         else:
+            Home(iden)
+            """
             with open(self.server_file, 'r') as f:
                 table = ast.literal_eval(f.read())
 
@@ -147,6 +149,7 @@ class Entry:
                     inst = value
                     break
             inst
+            """
     
     def signup(self):
         name = input("Username: ")
@@ -207,7 +210,7 @@ class Entry:
                         f.write(str(table))
                     cond1 = False
 
-                    x = Home(iden)
+                    """x = Home(iden)
                     ser = {}
                     try:
                         with open(self.server_file, 'r') as f:
@@ -218,6 +221,7 @@ class Entry:
                     ser[iden] = x
                     with open(self.server_file, 'w') as f:
                         f.write(str(ser))
+                    """
 
                     # creates an object of the phone/home class
                     # yet to be worked on
@@ -228,6 +232,5 @@ class Entry:
                     # val 1 is iden
                     # val 2 is security question
                     # val 3 is answer
-
 
 
