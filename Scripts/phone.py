@@ -22,12 +22,7 @@ class Home:
 
     def __init__(self, iden):
         self.iden = iden
-        print("Input '0' to continue. IF this is a signup process please input '1'.")
-        c = input(": ")
-        if c == '0':
-            self.main()
-        elif c == '1':
-            return
+        self.main()
 
     def main(self):
         banner = Figlet(font='standard')
@@ -46,7 +41,8 @@ class Home:
             print("Are you sure Y/N")
             c = input(": ")
             if c == 'y' or c == "Y":
-                time.sleep(1.5)
+                print('Shuting down...')
+                time.sleep(3)
                 sys.exit()
             elif c == 'n' or c == 'N':
                 self.__init__(self.iden)
