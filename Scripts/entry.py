@@ -33,15 +33,22 @@ class Start:
 
 class Entry:
 
-    def __init__(self):    
+    def __init__(self):   
         print()
+        print() 
+        print("-----------------------------------")
         print()
         print("Welcome to Blank Os")
         print("Enter L to login or S to signup")
         print("Enter 'e-x' at any input point to exit")
+        print()
+        print("-----------------------------------")
+        print()
         s = input(':')
         if s == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
 
@@ -60,14 +67,20 @@ class Entry:
             self.signup()
 
     def login(self):
+        print("-----------------------------------")
+        print()
         print("Enter login details")
         name = input("Username: ")
         if name == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
 
         password = input("Password: ")
+        print()
+        print("-----------------------------------")
         if password == 'e-x':
             print('Shuting down...')
             time.sleep(3)
@@ -80,6 +93,8 @@ class Entry:
                 table = ast.literal_eval(f.read())
         except:
             print("Login Error!!!")
+            print()
+            print("-----------------------------------")
             time.sleep(1)
             print()
             self.__init__()
@@ -99,32 +114,49 @@ class Entry:
                 else:
                     print()
                     print('Incorrect password')
+                    print()
+                    print("-----------------------------------")
                     # still to deal with forgot password
                     name = input("Username: ")
                     if name == 'e-x':
                         print('Shuting down...')
+                        print("-----------------------------------")
                         time.sleep(3)
                         sys.exit()
                     password = input("Password: ")
+                    print()
+                    print("-----------------------------------")
                     if password == 'e-x':
                         print('Shuting down...')
+                        print()
+                        print("-----------------------------------")
                         time.sleep(3)
                         sys.exit()
             else:
+                print()
+                print("-----------------------------------")
                 print('Username not recognised')
                 print('To enter new username, type "E"\
                 or type "S" to sign up. Type "e-x" to exit')
                 c = input(":")
+                print()
+                print("-----------------------------------")
                 if c == 'E' or c == 'e':
                     name = input("Username: ")
                     if name == 'e-x':
                         print()
                         print('Shuting down...')
+                        print()
+                        print("-----------------------------------")
                         time.sleep(3)
                         sys.exit()
                     password = input("Password: ")
+                    print()
+                    print("-----------------------------------")
                     if password == 'e-x':
                         print('Shuting down...')
+                        print()
+                        print("-----------------------------------")
                         time.sleep(3)
                         sys.exit()
                 elif c == 's' or c == 'S':
@@ -133,6 +165,8 @@ class Entry:
                 else:
                     cond = False
                     print('Shuting down...')
+                    print()
+                    print("-----------------------------------")
                     time.sleep(3)
                     sys.exit()
 
@@ -140,40 +174,46 @@ class Entry:
             pass
         else:
             Home(iden)
-            """
-            with open(self.server_file, 'r') as f:
-                table = ast.literal_eval(f.read())
-
-            for key, value in table.items():
-                if key == iden:
-                    inst = value
-                    break
-            inst
-            """
     
     def signup(self):
+        print()
+        print("-----------------------------------")
+        print()
         name = input("Username: ")
         if name == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
 
         password = input('Password: ')
+        print()
+        print("-----------------------------------")
         if password == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
-        
+        print()
         print("Enter security question and answer")
         que = input("Question: ")
         if que == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
         
         ans = input("Answer: ")
+        print()
+        print("-----------------------------------")
+        print()
         if ans == 'e-x':
             print('Shuting down...')
+            print()
+            print("-----------------------------------")
             time.sleep(3)
             sys.exit()
 
@@ -189,12 +229,17 @@ class Entry:
                     table = {}
                     names = []
                 if name in names:
+                    print("-----------------------------------")
                     print()
                     print("Username already taken!")
                     print("Input new username")
                     name = input("Username: ")
+                    print()
+                    print("-----------------------------------")
                     if name == 'e-x':
                         print('Shuting down...')
+                        print()
+                        print("-----------------------------------")
                         time.sleep(3)
                         sys.exit()
                 else:
@@ -203,6 +248,7 @@ class Entry:
                     iden = ''
                     for i in range(3):
                         iden += random.choice(a)
+                    print()
                     print("Your phone ID is: {0}".format(iden))
                 
                     # save details to accounts.txt
@@ -210,22 +256,6 @@ class Entry:
                     with open(self.account_file, 'w') as f:
                         f.write(str(table))
                     cond1 = False
-
-                    """x = Home(iden)
-                    ser = {}
-                    try:
-                        with open(self.server_file, 'r') as f:
-                            ser = ast.literal_eval(f.read())
-                    except:
-                        pass
-                    
-                    ser[iden] = x
-                    with open(self.server_file, 'w') as f:
-                        f.write(str(ser))
-                    """
-
-                    # creates an object of the phone/home class
-                    # yet to be worked on
 
                     self.login()
 
