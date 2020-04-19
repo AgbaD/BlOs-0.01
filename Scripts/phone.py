@@ -54,10 +54,12 @@ class Home:
             os.chdir('..')
             sub_path = os.getcwd()
             os.chdir(main_path)
-            help_file = os.path.join(sub_path, 'help.txt')
+            help_file = os.path.join(sub_path, 'README.md')
             with open(help_file, 'r') as f:
-                h = f.read()
-            print(h)
+                h = f.readlines()
+            for line in h:
+                print(line)
+                time.sleep(0.5)
             self.__init__(self.iden)
         elif command == 's' or command == 'S':
             Settings(self.iden)

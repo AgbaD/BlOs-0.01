@@ -203,6 +203,7 @@ class Entry:
                     iden = ''
                     for i in range(3):
                         iden += random.choice(a)
+                    print("Your phone ID is: {0}".format(iden))
                 
                     # save details to accounts.txt
                     table[name] = [password, iden, que, ans]
