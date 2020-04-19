@@ -26,9 +26,10 @@ class Home:
 
     def main(self):
         banner = Figlet(font='standard')
-        a = ['B','L','A','N','K']
-        b = choice(a)
-        print(banner.renderText(b))
+        print("---------------------------------------------")
+        print(banner.renderText('B'))
+        print("---------------------------------------------")
+        print()
         print("This is the home page")
         print("Enter one of the following commands")
         print("M for Menu")
@@ -36,18 +37,23 @@ class Home:
         print("H for Help")
         print("L to Logout")
         command = input(": ")
+        print()
+        print("---------------------------------------------")
 
         if command == 'l' or command == 'L':
             print("Are you sure Y/N")
             c = input(": ")
             if c == 'y' or c == "Y":
                 print('Shuting down...')
+                print("---------------------------------------------")
                 time.sleep(3)
                 sys.exit()
             elif c == 'n' or c == 'N':
                 self.__init__(self.iden)
             else:
                 print("Invalid command")
+                print()
+                print("---------------------------------------------")
                 self.__init__(self.iden)
         elif command == 'h' or command == 'H':
             main_path = os.getcwd()
@@ -57,9 +63,12 @@ class Home:
             help_file = os.path.join(sub_path, 'README.md')
             with open(help_file, 'r') as f:
                 h = f.readlines()
+            print("---------------------------------------------")
+            print()
             for line in h:
                 print(line)
                 time.sleep(0.5)
+            print("---------------------------------------------")
             self.__init__(self.iden)
         elif command == 's' or command == 'S':
             Settings(self.iden)
@@ -67,6 +76,7 @@ class Home:
             Menu(self.iden)
         else:
             print("Command not recognised")
+            print("---------------------------------------------")
             self.__init__(self.iden)
     
     def f_logout(self):
@@ -76,12 +86,15 @@ class Home:
 class Menu:
 
     def __init__(self, iden):
+        print("---------------------------------------------")
+        print()
         print("Enter 'e-x' to exit at any point")
         print("'M' for Messages")
         print("'C' for Contacts")
         print("'Ca' for Calculator")
         print("'G' for Games")
         print("'S' for Settings")
+        print("---------------------------------------------")
         self.iden = iden
         self.main()
 
@@ -101,6 +114,7 @@ class Menu:
             Settings(self.iden)
         else:
             print("Invalid command")
+            print("---------------------------------------------")
             self.__init__(self.iden)
 
 
@@ -109,13 +123,15 @@ class Message:
     # menu so as to be able to exit when needed
 
     def __init__(self, iden):
+        print("---------------------------------------------")
+        print()
         print("Create message[C]")
         print("Inbox[I]")
         print("Drafts[D]")
         print("Outbox[O]")
         print("Sent[S]")
         print("Exit[e-x]")
-        # self.menu = menu
+        print("---------------------------------------------")
         self.iden = iden
         self.main()
 
@@ -136,6 +152,7 @@ class Message:
             self.sent()
         else:
             print("Invalid command")
+            print("---------------------------------------------")
             self.main()
 
     def exit(self):
@@ -148,14 +165,18 @@ class Message:
         print("At any point in the begining of an input, enter 'e-x' to\
         exit")
 
+        print("---------------------------------------------")
+        print()
         to = input("Enter contact name or id\n")
         if to == 'e-x':
             self.__init__(self.iden)
 
+        print("---------------------------------------------")
         message = input("Enter your message. 'Enter' means you are done\n")
         if message == 'e-x':
             self.__init__(self.iden)
 
+        print("---------------------------------------------")
         command = input("Enter 'send' to send, 'save' to save to drafts\
         'back' to go back\n")
 
@@ -187,6 +208,7 @@ class Message:
                     if not os.path.exists(cont_file):
                         print('Contacts Empty!! Enter valid Id')
                         to = input("Enter contact id\n")
+                        print("---------------------------------------------")
                     else:
                         with open(cont_file, 'r') as cf:
                             ctab = ast.literal_eval(cf.read())
@@ -196,6 +218,7 @@ class Message:
                         except:
                             print('Contacts Empty!! Enter valid Id')
                             to = input("Enter contact id\n")
+                            print("---------------------------------------------")
                         clok = [key for key in ctable.keys()]   
                         # check for name in contacts.txt and get id
                         # if name in contacts; get id
@@ -206,6 +229,7 @@ class Message:
                             print("Name is not in contact list. Enter the proper\
                             name of enter id")
                             to = input("Enter contact name or id\n")
+                            print("---------------------------------------------")
 
             # got to the inbox of id
             # go to inbox.txt and check for the id
@@ -260,6 +284,8 @@ class Message:
         inbox_file = os.path.join(sub_path, box)
         if not os.path.exists(inbox_file):
             print('Inbox Empty!!')
+            print()
+            print("---------------------------------------------")
             self.__init__(self.iden)
         else:
             with open(inbox_file, 'r') as f:
@@ -275,12 +301,16 @@ class Message:
                 print(key)
                 lok.append(key)
             
+            print("---------------------------------------------")
+            print()
             command = input('Enter name or id to view message\n')
             # id would be numbers but as a string like such; '342'
             if command == 'e-x':
                 self.__init__(self.iden)
             if command in lok:
+                print("---------------------------------------------")
                 print(table[command])
+                print("---------------------------------------------")
                 time.sleep(3)
                 cd = input('Ready to exit?: ')
                 if cd == 'e-x':
@@ -302,6 +332,7 @@ class Message:
         draft_file = os.path.join(sub_path, draft)
         if not os.path.exists(draft_file):
             print('Draft Empty!!')
+            print("---------------------------------------------")
             self.__init__(self.iden)
         else:
             with open(draft_file, 'r') as f:
@@ -311,6 +342,7 @@ class Message:
                 table = drafts[self.iden]
             except:
                 print("Draft Empty!")
+                print("---------------------------------------------")
                 return
             lok = []
             # to keep track of message name or id
@@ -323,7 +355,10 @@ class Message:
             if command == 'e-x':
                 self.__init__(self.iden)
             if command in lok:
+                print("---------------------------------------------")
+                print()
                 print(table[command])
+                print("---------------------------------------------")
                 time.sleep(3)
                 cd = input('Ready to exit?: ')
                 if cd == 'e-x':
@@ -345,6 +380,7 @@ class Message:
         outbox_file = os.path.join(sub_path, obox)
         if not os.path.exists(outbox_file):
             print('Outbox Empty!!')
+            print("---------------------------------------------")
             self.__init__(self.iden)
         else:
             with open(outbox_file, 'r') as f:
@@ -354,6 +390,7 @@ class Message:
                 table = outboxes[self.iden]
             except:
                 print("Outbox Empty!")
+                print("---------------------------------------------")
                 return
             lok = []
             # to keep track of message name or id
@@ -366,7 +403,10 @@ class Message:
             if command == 'e-x':
                 self.__init__(self.iden)
             if command in lok:
+                print("---------------------------------------------")
+                print()
                 print(table[command])
+                print("---------------------------------------------")
                 time.sleep(3)
                 cd = input('Ready to exit?: ')
                 if cd == 'e-x':
@@ -388,6 +428,7 @@ class Message:
         sent_file = os.path.join(sub_path, sbox)
         if not os.path.exists(sent_file):
             print('Sent Empty!!')
+            print("---------------------------------------------")
             self.__init__(self.iden)
         else:
             with open(sent_file, 'r') as f:
@@ -397,6 +438,7 @@ class Message:
                 table = sents[self.iden]
             except:
                 print("Sent Empty!")
+                print("---------------------------------------------")
                 return
             lok = []
             # to keep track of message name or id
@@ -409,7 +451,10 @@ class Message:
             if command == 'e-x':
                 self.__init__(self.iden)
             if command in lok:
+                print("---------------------------------------------")
+                print()
                 print(table[command])
+                print("---------------------------------------------")
                 time.sleep(3)
                 cd = input('Ready to exit?: ')
                 if cd == 'e-x':
@@ -426,10 +471,13 @@ class Contacts:
     # menu so as to be able to exit when needed
 
     def __init__(self, iden):
+        print("---------------------------------------------")
+        print()
         print("Add Contact[A]")
         print("View Contacts[V]")
         print("Message contact[M]")
         print("Exit[e-x]")
+        print("---------------------------------------------")
         # self.menu = menu
         self.iden = iden
         self.main()
@@ -446,6 +494,7 @@ class Contacts:
             self.add_contact()
         else:
             print("Invalid command")
+            print("---------------------------------------------")
             self.main()
     
     def exit(self):
@@ -456,6 +505,7 @@ class Contacts:
     def cont_create_message(self):
         m = Message(self.iden)
         m.create_message()
+        print("---------------------------------------------")
         print('CONTACTS')
         self.__init__(self.iden)
 
@@ -471,6 +521,7 @@ class Contacts:
         if not os.path.exists(cont_file):
             print("Contacts Empty")
             cd = input("Enter 'A' to add contacts or any other key to go back\n")
+            print("---------------------------------------------")
             if cd == 'A' or cd == 'a':
                 self.add_contact()
             else:
@@ -483,6 +534,7 @@ class Contacts:
                 table = contactts[self.iden]
             except:
                 print("Contacts Empty")
+                print("---------------------------------------------")
                 return
             for key, value in table.items():
                 print(key, ':\t', value)
@@ -495,11 +547,14 @@ class Contacts:
     def add_contact(self):
         print("At any point in the begining of an input, enter 'e-x' to exit to message menu")
 
+        print("---------------------------------------------")
+        print()
         name = input("Enter contact's name\n")
         if name == 'e-x':
             self.__init__(self.iden)
 
         iden = input("Enter contact's id\n")
+        print("---------------------------------------------")
         if iden == 'e-x':
             self.__init__(self.iden)
 
@@ -536,6 +591,8 @@ class Settings:
         self.iden = iden
 
     def logout(self):
+        print("---------------------------------------------")
+        print()
         print("Are you sure Y/N")
         c = input(": ")
         if c == 'y' or c == "Y":
@@ -544,6 +601,7 @@ class Settings:
             self.__init__(self.iden)
         else:
             print("Invalid command")
+            print("---------------------------------------------")
             self.__init__(self.iden)
         
 

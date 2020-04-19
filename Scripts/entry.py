@@ -36,19 +36,19 @@ class Entry:
     def __init__(self):   
         print()
         print() 
-        print("-----------------------------------")
+        print("---------------------------------------------")
         print()
         print("Welcome to Blank Os")
         print("Enter L to login or S to signup")
         print("Enter 'e-x' at any input point to exit")
         print()
-        print("-----------------------------------")
+        print("---------------------------------------------")
         print()
         s = input(':')
         if s == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
 
@@ -67,20 +67,20 @@ class Entry:
             self.signup()
 
     def login(self):
-        print("-----------------------------------")
+        print("---------------------------------------------")
         print()
         print("Enter login details")
         name = input("Username: ")
         if name == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
 
         password = input("Password: ")
         print()
-        print("-----------------------------------")
+        print("---------------------------------------------")
         if password == 'e-x':
             print('Shuting down...')
             time.sleep(3)
@@ -94,7 +94,7 @@ class Entry:
         except:
             print("Login Error!!!")
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(1)
             print()
             self.__init__()
@@ -115,48 +115,48 @@ class Entry:
                     print()
                     print('Incorrect password')
                     print()
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     # still to deal with forgot password
                     name = input("Username: ")
                     if name == 'e-x':
                         print('Shuting down...')
-                        print("-----------------------------------")
+                        print("---------------------------------------------")
                         time.sleep(3)
                         sys.exit()
                     password = input("Password: ")
                     print()
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     if password == 'e-x':
                         print('Shuting down...')
                         print()
-                        print("-----------------------------------")
+                        print("---------------------------------------------")
                         time.sleep(3)
                         sys.exit()
             else:
                 print()
-                print("-----------------------------------")
+                print("---------------------------------------------")
                 print('Username not recognised')
                 print('To enter new username, type "E"\
                 or type "S" to sign up. Type "e-x" to exit')
                 c = input(":")
                 print()
-                print("-----------------------------------")
+                print("---------------------------------------------")
                 if c == 'E' or c == 'e':
                     name = input("Username: ")
                     if name == 'e-x':
                         print()
                         print('Shuting down...')
                         print()
-                        print("-----------------------------------")
+                        print("---------------------------------------------")
                         time.sleep(3)
                         sys.exit()
                     password = input("Password: ")
                     print()
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     if password == 'e-x':
                         print('Shuting down...')
                         print()
-                        print("-----------------------------------")
+                        print("---------------------------------------------")
                         time.sleep(3)
                         sys.exit()
                 elif c == 's' or c == 'S':
@@ -166,7 +166,7 @@ class Entry:
                     cond = False
                     print('Shuting down...')
                     print()
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     time.sleep(3)
                     sys.exit()
 
@@ -177,23 +177,23 @@ class Entry:
     
     def signup(self):
         print()
-        print("-----------------------------------")
+        print("---------------------------------------------")
         print()
         name = input("Username: ")
         if name == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
 
         password = input('Password: ')
         print()
-        print("-----------------------------------")
+        print("---------------------------------------------")
         if password == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
         print()
@@ -202,18 +202,18 @@ class Entry:
         if que == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
         
         ans = input("Answer: ")
         print()
-        print("-----------------------------------")
+        print("---------------------------------------------")
         print()
         if ans == 'e-x':
             print('Shuting down...')
             print()
-            print("-----------------------------------")
+            print("---------------------------------------------")
             time.sleep(3)
             sys.exit()
 
@@ -229,17 +229,17 @@ class Entry:
                     table = {}
                     names = []
                 if name in names:
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     print()
                     print("Username already taken!")
                     print("Input new username")
                     name = input("Username: ")
                     print()
-                    print("-----------------------------------")
+                    print("---------------------------------------------")
                     if name == 'e-x':
                         print('Shuting down...')
                         print()
-                        print("-----------------------------------")
+                        print("---------------------------------------------")
                         time.sleep(3)
                         sys.exit()
                 else:
