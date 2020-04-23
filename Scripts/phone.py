@@ -36,26 +36,26 @@ class Home:
         print("S for settings")
         print("H for Help")
         print("L to Logout")
-        command = input(": ")
+        command = input(": ").lower()
         print()
         print("---------------------------------------------")
 
-        if command == 'l' or command == 'L':
+        if command == 'l':
             print("Are you sure Y/N")
-            c = input(": ")
-            if c == 'y' or c == "Y":
+            c = input(": ").lower()
+            if c == 'y':
                 print('Shuting down...')
                 print("---------------------------------------------")
                 time.sleep(3)
                 sys.exit()
-            elif c == 'n' or c == 'N':
+            elif c == 'n':
                 self.__init__(self.iden)
             else:
                 print("Invalid command")
                 print()
                 print("---------------------------------------------")
                 self.__init__(self.iden)
-        elif command == 'h' or command == 'H':
+        elif command == 'h':
             main_path = os.getcwd()
             os.chdir('..')
             sub_path = os.getcwd()
@@ -70,9 +70,9 @@ class Home:
                 time.sleep(0.5)
             print("---------------------------------------------")
             self.__init__(self.iden)
-        elif command == 's' or command == 'S':
+        elif command == 's':
             Settings(self.iden)
-        elif command == 'm' or command == 'M':
+        elif command == 'm':
             Menu(self.iden)
         else:
             print("Command not recognised")
@@ -99,18 +99,18 @@ class Menu:
         self.main()
 
     def main(self):
-        c = input(': ')
+        c = input(': ').lower()
         if c == 'e-x':
             Home(self.iden)
-        elif c == 'm' or c == 'M':
+        elif c == 'm':
             Message(self.iden)
-        elif c == 'c' or c == 'C':
+        elif c == 'c':
             Contacts(self.iden)
-        elif c == 'ca' or self.c == 'Ca':
+        elif c == 'ca':
             Calculator(self.iden)
-        elif c == 'g' or c == 'G':
+        elif c == 'g':
             Games(self.iden)
-        elif c == 's' or c == 'S':
+        elif c == 's':
             Settings(self.iden)
         else:
             print("Invalid command")
@@ -136,19 +136,19 @@ class Message:
         self.main()
 
     def main(self):
-        command = input("Enter your command\n")
+        command = input("Enter your command\n").lower()
         if command == 'e-x':
             Menu(self.iden)
             return
-        elif command == 'C' or command == 'c':
+        elif command == 'c':
             self.create_message()
-        elif command == 'I' or command == 'i':
+        elif command == 'i':
             self.inbox()
-        elif command == "D" or command == 'd':
+        elif command == 'd':
             self.drafts()
-        elif command == "O" or command == 'o':
+        elif command == 'o':
             self.outbox()
-        elif command == "S" or command == 's':
+        elif command == 's':
             self.sent()
         else:
             print("Invalid command")
@@ -178,7 +178,7 @@ class Message:
 
         print("---------------------------------------------")
         command = input("Enter 'send' to send, 'save' to save to drafts\
-        'back' to go back\n")
+        'back' to go back\n").lower()
 
         if command == "back" or command == 'e-x':
             self.__init__(self.iden)
@@ -238,9 +238,13 @@ class Message:
             os.chdir(main_path1)
             server = 'db\\server.txt'
             inboxx = 'db\\inbox.txt'
+            outbox = 'db\\outbox.txt'
+            sent = 'de\\sent.txt'
             inboxx_file = os.path.join(sub_path1, inboxx)
             server_file = os.path.join(sub_path1, server)
-            
+            outbox_file = os.path.join(sub_path1, outbox)
+            sent_file = os.path.join(sub_path1, sent)
+
             with open(server_file, 'r')as f:
                 lst = ast.literal_eval(f.read())
             cond = False
@@ -249,8 +253,36 @@ class Message:
                     cond = True
                 else:
                     print("ID input does not exist. Input new ID")
-                    iden = input(": ")
-                    if iden == 'e-x':
+                    print("Enter e-x to exit")
+                    comm = input(": ")
+                    try:
+                        if int(comm):
+                            idea = comm
+                    except:
+                        print("Saving to outbox")
+                        cond = True
+                        if not os.path.exists(outbox_file):
+                            outboxx = {}
+                            table = {}
+                            table[iden] = message
+                            outboxx[self.iden] = table
+                            # add message to outbox
+                            with open(outbox_file, 'w') as f:
+                                f.write(str(outboxx))
+                        else:
+                            with open(outbox_file, 'r') as f:
+                                table = ast.literal_eval(f.read())
+                            try:    
+                                a = table[self.iden]
+                                a[iden] = message
+                                table[self.iden] = a
+                            except:
+                                a = {}
+                                a[iden] = message
+                                table[self.iden] = a
+                            with open(outbox_file, 'w') as f:
+                                f.write(str(table))
+                        os.chdir(main_path1)
                         self.__init__(self.iden)
 
             # go to inbox.txt and check for the id
@@ -277,6 +309,28 @@ class Message:
                 with open(inboxx_file, 'w') as f:
                     f.write(str(table))
             os.chdir(main_path1)
+            if not os.path.exists(sent_file):
+                sentt = {}
+                table = {}
+                table[iden] = message
+                sentt[self.iden] = table
+                # add message to sent
+                with open(sent_file, 'w') as f:
+                    f.write(str(sentt))
+            else:
+                with open(sent_file, 'r') as f:
+                    table = ast.literal_eval(f.read())
+                try:    
+                    a = table[self.iden]
+                    a[iden] = message
+                    table[self.iden] = a
+                except:
+                    a = {}
+                    a[iden] = message
+                    table[self.iden] = a
+                with open(sent_file, 'w') as f:
+                    f.write(str(table))
+                        
             self.__init__(self.iden)
             # once sending is done, return to self.__init__
 
@@ -357,9 +411,11 @@ class Message:
                 print(table[command])
                 print("---------------------------------------------")
                 time.sleep(3)
-                cd = input('Ready to exit?: ')
+                cd = input('Enter R to reply or any other key to exit: ').lower()
                 if cd == 'e-x':
                     self.__init__(self.iden)
+                elif cd == 'r':
+                    self.create_message()
                 else:
                     self.inbox()
             else:
@@ -528,14 +584,14 @@ class Contacts:
         self.main()
 
     def main(self):
-        command = input("Enter your command\n")
+        command = input("Enter your command\n").lower()
         if command == 'e-x':
             Menu(self.iden)
-        elif command == 'M' or command == 'm':
+        elif command == 'm':
             self.cont_create_message()
-        elif command == 'V' or command == 'v':
+        elif command == 'v':
             self.view_contacts()
-        elif command == 'A' or command == 'a':
+        elif command == 'a':
             self.add_contact()
         else:
             print("Invalid command")
@@ -565,9 +621,9 @@ class Contacts:
         cont_file = os.path.join(sub_path, contacts)
         if not os.path.exists(cont_file):
             print("Contacts Empty")
-            cd = input("Enter 'A' to add contacts or any other key to go back\n")
+            cd = input("Enter 'A' to add contacts or any other key to go back\n").lower()
             print("---------------------------------------------")
-            if cd == 'A' or cd == 'a':
+            if cd == 'a':
                 self.add_contact()
             else:
                 self.__init__(self.iden)
@@ -583,8 +639,8 @@ class Contacts:
                 return
             for key, value in table.items():
                 print(key, ':\t', value)
-            command = input("Enter 'M' to message contact or any other key to go back\n")
-            if command == 'M' or command == 'm':
+            command = input("Enter 'M' to message contact or any other key to go back\n").lower()
+            if command == 'm':
                 self.cont_create_message()
             else:
                 self.__init__(self.iden)
@@ -644,10 +700,10 @@ class Settings:
         print("---------------------------------------------")
         print()
         print("Are you sure Y/N")
-        c = input(": ")
-        if c == 'y' or c == "Y":
+        c = input(": ").lower()
+        if c == 'y':
             sys.exit()
-        elif c == 'n' or c == 'N':
+        elif c == 'n':
             self.__init__(self.iden)
         else:
             print("Invalid command")

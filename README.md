@@ -32,12 +32,6 @@ Setings
 To send message to other operators using the unique ID
 
 This is to be arranged that users on the same LAN can send messages 
- but for now it is only based for users on the same PC
-
-An example of its usage as far as the version 0.01 is concerned
-For roommates or colleagues that share the same computer 
-
-Messages can be left for the other to view once he or she logs in to 
-their account.
+ but for now it is only based for users on the same machine
 
 -----------------------------------------------------------------------
