@@ -136,8 +136,8 @@ class Entry:
                 print()
                 print("---------------------------------------------")
                 print('Username not recognised')
-                print('To enter new username, type "E"\
-                or type "S" to sign up. Type "e-x" to exit')
+                print('To enter new username, type "E"')
+                print('type "S" to sign up. Type "e-x" to exit')
                 c = input(":")
                 print()
                 print("---------------------------------------------")
@@ -256,6 +256,16 @@ class Entry:
                     with open(self.account_file, 'w') as f:
                         f.write(str(table))
                     cond1 = False
+
+                    lst = []
+                    try:
+                        with open(self.server_file, 'r') as f:
+                            lst = ast.literal_eval(f.read())
+                    except:
+                        pass
+                    lst.append(iden)
+                    with open(self.server_file, 'w') as f:
+                        f.write(str(lst))
 
                     self.login()
 

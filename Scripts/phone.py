@@ -183,8 +183,8 @@ class Message:
         if command == "back" or command == 'e-x':
             self.__init__(self.iden)
         
-        iden = ''
         if command == "send":
+            iden = ''
             # pick up iden
 
             # This is for the contact to keep being prompted as long as they
@@ -231,13 +231,53 @@ class Message:
                             to = input("Enter contact name or id\n")
                             print("---------------------------------------------")
 
-            # got to the inbox of id
+            # check if id is on the server
+            main_path1 = os.getcwd()
+            os.chdir('..')
+            sub_path1 = os.getcwd()
+            os.chdir(main_path1)
+            server = 'db\\server.txt'
+            inboxx = 'db\\inbox.txt'
+            inboxx_file = os.path.join(sub_path1, inboxx)
+            server_file = os.path.join(sub_path1, server)
+            
+            with open(server_file, 'r')as f:
+                lst = ast.literal_eval(f.read())
+            cond = False
+            while not cond:
+                if iden in lst:
+                    cond = True
+                else:
+                    print("ID input does not exist. Input new ID")
+                    iden = input(": ")
+                    if iden == 'e-x':
+                        self.__init__(self.iden)
+
             # go to inbox.txt and check for the id
-            """Check if the id is on the server. The server is where all ID's
-            are saved as a table key and the value is the objective instance of the 
-            mobile phone instantiated with the id
-            """
-            # add message to inbox and create notification
+
+            if not os.path.exists(inboxx_file):
+                inbox = {}
+                table = {}
+                table[self.iden] = message
+                inbox[iden] = table
+                # add message to inbox and create notification
+                with open(inboxx_file, 'w') as f:
+                    f.write(str(inbox))
+            else:
+                with open(inboxx_file, 'r') as f:
+                    table = ast.literal_eval(f.read())
+                try:    
+                    a = table[iden]
+                    a[self.iden] = message
+                    table[iden] = a
+                except:
+                    a = {}
+                    a[self.iden] = message
+                    table[iden] = a
+                with open(inboxx_file, 'w') as f:
+                    f.write(str(table))
+            os.chdir(main_path1)
+            self.__init__(self.iden)
             # once sending is done, return to self.__init__
 
         if command == 'save':
@@ -257,9 +297,14 @@ class Message:
             else:
                 with open(draft_file, 'r') as f:
                     table = ast.literal_eval(f.read())
-                a = table[self.iden]
-                a[to] = message
-                table[self.iden] = a
+                try:    
+                    a = table[self.iden]
+                    a[to] = message
+                    table[self.iden] = a
+                except:
+                    a = {}
+                    a[to] = message
+                    table[self.iden] = a
                 with open(draft_file, 'w') as f:
                     f.write(str(table))
             os.chdir(main_path)
@@ -574,10 +619,15 @@ class Contacts:
         else:
             with open(cont_file, 'r') as f:
                 table = ast.literal_eval(f.read())
-            x =table[self.iden]
-            x[name] = iden
-            # to deal with multiple contacts with same names
-            table[self.iden] = x
+            try:
+                x =table[self.iden]
+                x[name] = iden
+                # to deal with multiple contacts with same names
+                table[self.iden] = x
+            except:
+                x = {}
+                x[name] = iden
+                table[self.iden] = x
             with open(cont_file, 'w') as f:
                 f.write(str(table))
         os.chdir(main_path)
