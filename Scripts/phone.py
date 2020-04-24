@@ -695,6 +695,77 @@ class Settings:
 
     def __init__(self, iden):
         self.iden = iden
+        print("---------------------------------------------")
+        print()
+        print("Enter G to get ID")
+        print("Enter CM to clear messages")
+        print("Enter L to logout")
+        print("Enter CC to clear contacts")
+        print("Enter D to delete account")
+        print()
+        command = input(": ").lower()
+        if command == 'e-x':
+            Menu(self.iden)
+        elif command == 'g':
+            self.get_id()
+        elif command == 'cm':
+            self.clear_messages()
+        elif command == 'l':
+            self.logout()
+        else:
+            print("Invalid Entry")
+            self.__init__(self.iden)
+
+
+    def get_id(self):
+        print(self.iden)
+        self.__init__(self.iden)
+
+    def clear_messages(self):
+        print("---------------------------------------------")
+        print()
+        a = {'Inbox': "I", 'Outbox':'O', "Sent": 'S', "Drafts": 'D'}
+        for k, v in a.items():
+            print(k,':',v)
+        b ={'i':'db\\inbox.txt','o':'db\\outbox.txt','s':'db\\sent.txt','d':'db\\drafts.txt'}
+        print()
+        bo = input("Enter which box to clear e.g 'I' for Inbox: \n").lower()
+        kks = [i for i in b.keys()]
+        if bo not in kks:
+            self.__init__(self.iden)
+        print()
+        cd = input("Are you sure you want to delete all messages y/n \n").lower()
+        if cd == 'n' or cd == 'e-x':
+            self.__init__(self.iden)
+        elif cd == 'y':
+            main_path = os.getcwd()
+            os.chdir('..')
+            sub_path = os.getcwd()
+            os.chdir(main_path)
+            dbox = b[bo]
+            del_file = os.path.join(sub_path, dbox)
+            if not os.path.exists(del_file):
+                print()
+                print('Box Empty!!')
+                print("---------------------------------------------")
+                self.__init__(self.iden)
+            else:
+                with open(del_file, 'r') as f:
+                    table = ast.literal_eval(f.read())
+                try:
+                    my = table[self.iden]
+                    dell = table.pop(self.iden)
+                except:
+                    print()
+                    print("Box Empty!")
+                    print("---------------------------------------------")
+            self.__init__(self.iden)
+        else:
+            print()
+            print("Invalid command!")
+            print()
+            print("---------------------------------------------")
+            self.__init__(Self.iden)
 
     def logout(self):
         print("---------------------------------------------")
@@ -715,6 +786,57 @@ class Calculator:
 
     def __init__(self, iden):
         self.iden = iden
+        print("---------------------------------------------")
+        print("Please select the type of operation you would like to perform!")
+        print("Enter 'e-x' at any point to exit")
+        print()
+
+        operations = {'Addition': 'A','Division': 'D','Exponent': 'E',
+        'Multiplication': 'M','Modulus': 'Mod','Subtraction': 'S',}
+
+        for k, v in operations.items():
+            print(k,':',v)
+
+        print()
+        print("---------------------------------------------")
+        print()
+        self.calc()
+
+    def calc(self):
+        print("Input operation type letter e.g 'M' for multiplication")
+        operation = input(': ').upper()
+        if operation == 'e-x':
+            Menu(self.iden)
+        number1= int(input('First Number: '))
+        if number1 == 'e-x':
+            Menu(self.iden)
+        number2 = int(input('Second Number: '))
+        if number2 == 'e-x':
+            Menu(self.iden)
+
+        print()
+        print("---------------------------------------------")
+        print()
+        
+        if operation == 'M':
+            print('{0} * {1} =   '.format(number1, number2),number1 * number2)
+        elif operation == 'D':
+            print('{0} / {1} =   '.format(number1, number2),number1 / number2)
+        elif operation == 'A':
+            print('{0} + {1} =   '.format(number1, number2),number1 + number2)
+        elif operation == 'E':
+            print('{0} exp {1} =   '.format(number1, number2),number1 ** number2)
+        elif operation == 'MOD':
+            print('{0} mod {1} =   '.format(number1, number2),number1 % number2)
+        elif operation == 'S':
+            print('{0} - {1} =   '.format(number1, number2),number1 - number2)
+        else:
+            print("Invalid operation!")
+            self.__init__(self.iden)
+            
+        print()
+        print("---------------------------------------------")
+        self.__init__(self.iden)
 
 
 class Games:

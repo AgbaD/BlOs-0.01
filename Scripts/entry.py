@@ -269,9 +269,4 @@ class Entry:
 
                     self.login()
 
-                    # val 0 is password
-                    # val 1 is iden
-                    # val 2 is security question
-                    # val 3 is answer
-
 
