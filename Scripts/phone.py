@@ -240,7 +240,7 @@ class Message:
             server = 'db\\server.txt'
             inboxx = 'db\\inbox.txt'
             outbox = 'db\\outbox.txt'
-            sent = 'de\\sent.txt'
+            sent = 'db\\sent.txt'
             inboxx_file = os.path.join(sub_path1, inboxx)
             server_file = os.path.join(sub_path1, server)
             outbox_file = os.path.join(sub_path1, outbox)
@@ -698,6 +698,7 @@ class Settings:
         self.iden = iden
         print("---------------------------------------------")
         print()
+        print("Enter 'e-x' at any input to exit")
         print("Enter G to get ID")
         print("Enter CM to clear messages")
         print("Enter L to logout")
@@ -762,12 +763,17 @@ class Settings:
                 with open(del_file, 'r') as f:
                     table = ast.literal_eval(f.read())
                 try:
-                    my = table[self.iden]
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     print()
                     print("Box Empty!")
                     print("---------------------------------------------")
+                if table != {}:
+                    with open(del_file, 'w') as f:
+                        f.write(str(table))
+                else:
+                    os.remove(del_file)
+
             self.__init__(self.iden)
         else:
             print()
@@ -809,19 +815,23 @@ class Settings:
             del_file = os.path.join(sub_path, cbox)
             if not os.path.exists(del_file):
                 print()
-                print('Box Empty!!')
+                print('Contacts Empty!!')
                 print("---------------------------------------------")
                 self.__init__(self.iden)
             else:
                 with open(del_file, 'r') as f:
                     table = ast.literal_eval(f.read())
                 try:
-                    my = table[self.iden]
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     print()
                     print("Contacts Empty!")
                     print("---------------------------------------------")
+                if table != {}:
+                    with open(del_file, 'w') as f:
+                        f.write(str(table))
+                else:
+                    os.remove(del_file)
             self.__init__(self.iden)
         else:
             print()
@@ -860,77 +870,77 @@ class Settings:
                 with open(contacts_file, 'r') as c:
                     table = ast.literal_eval(c.read())
                 try:
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     pass
-                with open(contacts_file, 'w') as c:
-                    if table != {}:
+                if table != {}:
+                    with open(contacts_file, 'w') as c:
                         c.write(str(table))
-                    else:
-                        os.remove(contacts_file)
+                else:
+                    os.remove(contacts_file)
 
             if os.path.exists(draft_file):
                 with open(draft_file, 'r') as c:
                     table = ast.literal_eval(c.read())
                 try:
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     pass
-                with open(draft_file, 'w') as c:
-                    if table != {}:
+                if table != {}:
+                    with open(draft_file, 'w') as c:
                         c.write(str(table))
-                    else:
-                        os.remove(draft_file)
+                else:
+                    os.remove(draft_file)
             
             if os.path.exists(inbox_file):
                 with open(inbox_file, 'r') as c:
                     table = ast.literal_eval(c.read())
                 try:
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     pass
-                with open(inbox_file, 'w') as c:
-                    if table != {}:
+                if table != {}:
+                    with open(inbox_file, 'w') as c:
                         c.write(str(table))
-                    else:
-                        os.remove(inbox_file)
+                else:
+                    os.remove(inbox_file)
 
             if os.path.exists(sent_file):
                 with open(sent_file, 'r') as c:
                     table = ast.literal_eval(c.read())
                 try:
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     pass
-                with open(sent_file, 'w') as c:
-                    if table != {}:
+                if table != {}:
+                    with open(sent_file, 'w') as c:
                         c.write(str(table))
-                    else:
-                        os.remove(sent_file)
+                else:
+                    os.remove(sent_file)
             
             if os.path.exists(outbox_file):
                 with open(outbox_file, 'r') as c:
                     table = ast.literal_eval(c.read())
                 try:
-                    dell = table.pop(self.iden)
+                    del table[self.iden]
                 except:
                     pass
-                with open(outbox_file, 'w') as c:
-                    if table != {}:
+                if table != {}:
+                    with open(outbox_file, 'w') as c:
                         c.write(str(table))
-                    else:
-                        os.remove(outbox_file)
+                else:
+                    os.remove(outbox_file)
 
             if os.path.exists(server_file):
                 with open(server_file, 'r') as f:
                     lst = ast.literal_eval(f.read())
                 lst.remove(self.iden)
-                with open(server_file, 'w') as f:
-                    if lst != []:    
+                if table != {}:
+                    with open(server_file, 'w') as f:    
                         f.write(str(lst))
-                    else:
-                        os.remove(server_file)
-                        open(server_file, 'x')
+                else:
+                    os.remove(server_file)
+                    open(server_file, 'x')
 
             if os.path.exists(account_file):
                 with open(account_file, 'r') as f:
@@ -940,15 +950,15 @@ class Settings:
                     a[v[1]] = k
                 for k, v in a.items():
                     if k == self.iden:
-                        dell = table.pop(v)
+                        del table[v]
                         break
-                with open(account_file, 'w') as f:
-                    if table != {}:
+                if table != {}:        
+                    with open(account_file, 'w') as f:
                         f.write(str(table))
-                    else:
-                        os.remove(account_file)
-                        open(account_file, 'x')
-                        
+                else:
+                    os.remove(account_file)
+                    open(account_file, 'x')
+
             print('Shuting down...')
             print()
             print("---------------------------------------------")
@@ -981,32 +991,44 @@ class Calculator:
 
     def calc(self):
         print("Input operation type letter e.g 'M' for multiplication")
-        operation = input(': ').upper()
+        operation = input(': ').lower()
         if operation == 'e-x':
             Menu(self.iden)
-        number1= int(input('First Number: '))
-        if number1 == 'e-x':
+
+        num1= input('First Number: ')
+        if num1 == 'e-x':
             Menu(self.iden)
-        number2 = int(input('Second Number: '))
-        if number2 == 'e-x':
+        try:
+            number1 = int(num1)
+        except:
+            print("Invalid input")
+            self.calc()
+        
+        num2 = input('Second Number: ')
+        if num2 == 'e-x':
             Menu(self.iden)
+        try:
+            number2 = int(num2)
+        except:
+            print("Invalid input")
+            self.calc()
 
         print()
         print("---------------------------------------------")
         print()
         
-        if operation == 'M':
-            print('{0} * {1} =   '.format(number1, number2),number1 * number2)
-        elif operation == 'D':
-            print('{0} / {1} =   '.format(number1, number2),number1 / number2)
-        elif operation == 'A':
-            print('{0} + {1} =   '.format(number1, number2),number1 + number2)
-        elif operation == 'E':
-            print('{0} exp {1} =   '.format(number1, number2),number1 ** number2)
-        elif operation == 'MOD':
-            print('{0} mod {1} =   '.format(number1, number2),number1 % number2)
-        elif operation == 'S':
-            print('{0} - {1} =   '.format(number1, number2),number1 - number2)
+        if operation == 'm':
+            print('{0} * {1}  =  '.format(number1, number2),number1 * number2)
+        elif operation == 'd':
+            print('{0} / {1}  =  '.format(number1, number2),number1 / number2)
+        elif operation == 'a':
+            print('{0} + {1}  =  '.format(number1, number2),number1 + number2)
+        elif operation == 'e':
+            print('{0} exp {1}  =  '.format(number1, number2),number1 ** number2)
+        elif operation == 'mod':
+            print('{0} mod {1}  =  '.format(number1, number2),number1 % number2)
+        elif operation == 's':
+            print('{0} - {1}  =  '.format(number1, number2),number1 - number2)
         else:
             print("Invalid operation!")
             self.__init__(self.iden)

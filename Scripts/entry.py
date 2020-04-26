@@ -65,6 +65,9 @@ class Entry:
             self.login()
         elif s == 's' or s == 'S':
             self.signup()
+        else:
+            print("Invalid Entry")
+            self.__init__()
 
     def login(self):
         print("---------------------------------------------")
