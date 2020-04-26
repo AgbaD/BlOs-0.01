@@ -3,6 +3,8 @@ Blank OS 0.01
 
 A command line based 2G mobile OS that mimics the Java OS
 
+Interface kinda looks :)> but oh well. I'm a backend engineer
+
 -----------------------------------------------------------------------
 
 # How to use
