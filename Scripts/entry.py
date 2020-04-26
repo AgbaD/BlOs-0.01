@@ -257,6 +257,7 @@ class Entry:
                         f.write(str(table))
                     cond1 = False
 
+                    # add id to server list
                     lst = []
                     try:
                         with open(self.server_file, 'r') as f:

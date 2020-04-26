@@ -45,6 +45,7 @@ class Home:
             c = input(": ").lower()
             if c == 'y':
                 print('Shuting down...')
+                print()
                 print("---------------------------------------------")
                 time.sleep(3)
                 sys.exit()
@@ -703,6 +704,9 @@ class Settings:
         print("Enter CC to clear contacts")
         print("Enter D to delete account")
         print()
+        self.main()
+
+    def main(self):
         command = input(": ").lower()
         if command == 'e-x':
             Menu(self.iden)
@@ -712,12 +716,17 @@ class Settings:
             self.clear_messages()
         elif command == 'l':
             self.logout()
+        elif command == 'cc':
+            self.clear_contacts()
+        elif command == 'd':
+            self.del_account()
         else:
             print("Invalid Entry")
             self.__init__(self.iden)
 
 
     def get_id(self):
+        print("---------------------------------------------")
         print(self.iden)
         self.__init__(self.iden)
 
@@ -773,6 +782,10 @@ class Settings:
         print("Are you sure Y/N")
         c = input(": ").lower()
         if c == 'y':
+            print('Shuting down...')
+            print()
+            print("---------------------------------------------")
+            time.sleep(3)
             sys.exit()
         elif c == 'n':
             self.__init__(self.iden)
@@ -780,7 +793,171 @@ class Settings:
             print("Invalid command")
             print("---------------------------------------------")
             self.__init__(self.iden)
+
+    def clear_contacts(self):
+        print("---------------------------------------------")
+        print()
+        cd = input("Are you sure you want to delete all contacts y/n \n").lower()
+        if cd == 'n' or cd == 'e-x':
+            self.__init__(self.iden)
+        elif cd == 'y':
+            main_path = os.getcwd()
+            os.chdir('..')
+            sub_path = os.getcwd()
+            os.chdir(main_path)
+            cbox = 'db\\contacts.txt'
+            del_file = os.path.join(sub_path, cbox)
+            if not os.path.exists(del_file):
+                print()
+                print('Box Empty!!')
+                print("---------------------------------------------")
+                self.__init__(self.iden)
+            else:
+                with open(del_file, 'r') as f:
+                    table = ast.literal_eval(f.read())
+                try:
+                    my = table[self.iden]
+                    dell = table.pop(self.iden)
+                except:
+                    print()
+                    print("Contacts Empty!")
+                    print("---------------------------------------------")
+            self.__init__(self.iden)
+        else:
+            print()
+            print("Invalid command!")
+            print()
+            print("---------------------------------------------")
+            self.__init__(Self.iden)
         
+    def del_account(self):
+        print("WARNING!!! Account will be deleted permanently!")
+        print("Proceed with caution!")
+        c = input("Delete Account y/n \n").lower()
+        if c == 'y':
+            # check contacts, messages
+            # check server and accounts
+            main_path = os.getcwd()
+            os.chdir('..')
+            sub_path = os.getcwd()
+            os.chdir(main_path)
+            contacts = 'db\\contacts.txt'
+            inbox = 'db\\inbox.txt'
+            drafts = 'db\\drafts.txt'
+            sent = 'db\\sent.txt'
+            outbox = 'db\\outbox.txt'
+            server = 'db\\server.txt'
+            accounts = 'db\\accounts.txt'
+            contacts_file = os.path.join(sub_path, contacts)
+            draft_file = os.path.join(sub_path, drafts)
+            inbox_file = os.path.join(sub_path, inbox)
+            sent_file = os.path.join(sub_path, sent)
+            outbox_file = os.path.join(sub_path, outbox)
+            server_file = os.path.join(sub_path, server)
+            account_file = os.path.join(sub_path, accounts)
+
+            if os.path.exists(contacts_file):
+                with open(contacts_file, 'r') as c:
+                    table = ast.literal_eval(c.read())
+                try:
+                    dell = table.pop(self.iden)
+                except:
+                    pass
+                with open(contacts_file, 'w') as c:
+                    if table != {}:
+                        c.write(str(table))
+                    else:
+                        os.remove(contacts_file)
+
+            if os.path.exists(draft_file):
+                with open(draft_file, 'r') as c:
+                    table = ast.literal_eval(c.read())
+                try:
+                    dell = table.pop(self.iden)
+                except:
+                    pass
+                with open(draft_file, 'w') as c:
+                    if table != {}:
+                        c.write(str(table))
+                    else:
+                        os.remove(draft_file)
+            
+            if os.path.exists(inbox_file):
+                with open(inbox_file, 'r') as c:
+                    table = ast.literal_eval(c.read())
+                try:
+                    dell = table.pop(self.iden)
+                except:
+                    pass
+                with open(inbox_file, 'w') as c:
+                    if table != {}:
+                        c.write(str(table))
+                    else:
+                        os.remove(inbox_file)
+
+            if os.path.exists(sent_file):
+                with open(sent_file, 'r') as c:
+                    table = ast.literal_eval(c.read())
+                try:
+                    dell = table.pop(self.iden)
+                except:
+                    pass
+                with open(sent_file, 'w') as c:
+                    if table != {}:
+                        c.write(str(table))
+                    else:
+                        os.remove(sent_file)
+            
+            if os.path.exists(outbox_file):
+                with open(outbox_file, 'r') as c:
+                    table = ast.literal_eval(c.read())
+                try:
+                    dell = table.pop(self.iden)
+                except:
+                    pass
+                with open(outbox_file, 'w') as c:
+                    if table != {}:
+                        c.write(str(table))
+                    else:
+                        os.remove(outbox_file)
+
+            if os.path.exists(server_file):
+                with open(server_file, 'r') as f:
+                    lst = ast.literal_eval(f.read())
+                lst.remove(self.iden)
+                with open(server_file, 'w') as f:
+                    if lst != []:    
+                        f.write(str(lst))
+                    else:
+                        os.remove(server_file)
+                        open(server_file, 'x')
+
+            if os.path.exists(account_file):
+                with open(account_file, 'r') as f:
+                    table = ast.literal_eval(f.read())
+                a = {}
+                for k, v in table.items():
+                    a[v[1]] = k
+                for k, v in a.items():
+                    if k == self.iden:
+                        dell = table.pop(v)
+                        break
+                with open(account_file, 'w') as f:
+                    if table != {}:
+                        f.write(str(table))
+                    else:
+                        os.remove(account_file)
+                        open(account_file, 'x')
+                        
+            print('Shuting down...')
+            print()
+            print("---------------------------------------------")
+            time.sleep(3)
+            sys.exit()
+        else:
+            self.__init__(self.iden)
+                    
+
 
 class Calculator:
 
