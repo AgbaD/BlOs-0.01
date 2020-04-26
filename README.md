@@ -6,7 +6,9 @@ A command line based 2G mobile OS that mimics the Java OS
 -----------------------------------------------------------------------
 
 # How to use
-To get started, sign up tto create an account(a personalized phone)
+To get started, run [main.py] as a script
+
+Sign up tto create an account(a personalized phone)
 
 An ID will be given upon sign with will be used as a means of identification
 and also to send messages,
