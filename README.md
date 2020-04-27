@@ -10,7 +10,11 @@ Interface kinda looks :)> but oh well. I'm a backend engineer
 # How to use
 To get started, run [main.py] as a script
 
+<<<<<<< HEAD
 Sign up to create an account(a personalized phone)
+=======
+Sign up tto create an account(a personalized phone)
+>>>>>>> 6821fc5fe0dfa3e993f41a69eb6bc5bf05f1618a
 
 An ID will be given upon sign with will be used as a means of identification
 and also to send messages,
