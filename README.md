@@ -1,9 +1,9 @@
 # BlOs-0.01
 Blank OS 0.01
 
-A command line based 2G mobile OS that mimics the Java OS
+A command line based mock mobile
 
-Interface kinda looks :)> but oh well. I'm a backend engineer
+Interface kinda looks :)> but oh well.
 
 -----------------------------------------------------------------------
 
